@@ -1,0 +1,23 @@
+<h3>目前菜單</h3>
+<table border>
+<tr><th>餐點</th><th>價錢</th></tr>
+{%for line in menu%}
+    {% set item=line.split() %}
+    <tr>
+        <td>{{ item[0] }}</td>
+        <td>{{ item[1] }}</td>
+    </tr>
+{% endfor %}
+</table>
+<br>
+<form action='{{ url_for('add_menu') }}'>
+    <button type="submit">add</button>
+</form>
+<form action='{{ url_for('remove_menu') }}'>
+    <button type="submit">remove</button>
+</form>
+<form action='{{ url_for('shop') }}'>
+    <button type="submit">back</button>
+</form>
+
+

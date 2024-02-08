@@ -1,0 +1,17 @@
+<h1>成功更改消費紀錄</h1>
+<form action='/edit_history'><input type="submit" value="back"></form>
+<h3>目前已繳費紀錄</h3>
+<table border>
+    <tr><th>班級座號</th><th>餐點</th><th>價格</th><th>日期</th><th>付款狀態</th></tr>
+    {%for line in history%}
+        {% set item=line.split() %}
+        <tr>
+            <td>{{ item[0] }}</td>  
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3]+" "+item[4] }}</td>
+            <td>已付款</td>
+        </tr>
+    {% endfor %}
+</table><br>
+<form method="POST"><input type="submit" value="刪除已繳費紀錄"></form>

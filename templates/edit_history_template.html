@@ -1,0 +1,36 @@
+<h2>店家版本點餐紀錄</h2>
+<form method="POST">
+    班級座號:<input type=text name=name>
+    日期:<input type=date name=date>
+    付款狀態:
+    <select name=payment>
+        <option value="free">不限</option>
+        <option value="unpaid">未付款</option>
+        <option value="paid">已付款</option>
+    </select><br>
+    <input type=submit value="確認"><br>
+</form>
+<form action='{{ url_for('edit_data') }}' method="GET">
+<table border>
+    <tr><th>班級座號</th><th>餐點</th><th>價格</th><th>日期</th><th>付款狀態</th></tr>
+    {%for line in history%}
+        {% set item=line.split() %}
+        <tr>
+            <td>{{ item[0] }}</td>  
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3]+" "+item[4] }}</td>
+            {% set id=item[0]+" "+item[3]+" "+item[4] %}
+            <td>
+                <input type="radio" name="{{ id }}" value="paid" {% if item[5] == 'paid' %}checked{% endif %}> 已付款
+                <input type="radio" name="{{ id }}" value="unpaid" {% if item[5] == 'unpaid' %}checked{% endif %}> 未付款
+        </tr>
+    {% endfor %}
+</table><br>
+<input type=submit value="更改繳費狀態"><br>
+</form>
+<p>總價: {{sum}}</p>
+<form action='{{ url_for('shop') }}'>
+    <button type="submit">back</button>
+</form>
+

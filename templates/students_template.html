@@ -1,0 +1,15 @@
+<h1>黑店點餐首頁</h1>
+<form method="POST">
+    班級座號:<input type=text name=name><br>
+    餐點:<select name=lunch>
+    {%for line in menu%}
+        {% set item=line.split(" ") %}
+            <option value="{{item[0]}}${{item[1]}}">{{ item[0]}}${{item[1]}}</option>
+    {% endfor %}
+    </select><br>
+    備註:<input type=text name=detail><br><br>
+    <input type=submit value="確認餐點"><br>
+</form>
+<form action='{{ url_for('view_history') }}'>
+    <button type="submit">查看點餐紀錄</button>
+</form>
